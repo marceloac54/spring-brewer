@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:brewer="http://brewer.algaworks.com"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+
+	<head>
+		<title>Cadastro de cidade</title>
+	</head>
+
+	<body>
+		<section class="aw-layout-content  js-content" layout:fragment="conteudo">
+			<div class="page-header">
+				<div class="container-fluid">
+					<h1>
+						Cadastro de cidade 
+					</h1>
+				</div>
+			</div>
+			
+			<div class="container-fluid">
+				
+				<form method="post" th:object="${cidade}" class="form-vertical js-form-loading" th:action="@{/cidades/novo}">
+					
+					<brewer:message/>
+				
+					<div class="row">
+						<div class="col-lg-3 form-group  bw-required"  brewer:classforerror="estado">
+							<label for="estado" class="control-label">Estado</label>
+							<select id="estado" class="form-control" th:field="*{estado}">
+								<option value="">Selecione o estado</option>
+								<th:block th:each="estado : ${estados}">
+									<option th:value="${estado.codigo}" th:text="${estado.nome}"></option>
+								</th:block>
+							</select>
+						</div>
+						<div class="col-lg-9 form-group  bw-required" brewer:classforerror="nome">
+							<label for="nome" class="control-label">Nome</label>
+							<input id="nome" type="text" class="form-control" th:field="*{nome}"/>
+						</div>
+					</div>
+					
+					<button class="btn btn-primary" type="submit">Salvar</button>
+				
+				</form>
+			
+			</div>
+			
+		</section>
+	</body>
+	
+</html>
